@@ -181,11 +181,20 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
           ӨРКЕНИЕТ ЖОЛЫН ҚҰРАСТЫР
         </motion.h2>
 
-        <p className="text-xs sm:text-sm text-[#94A3B8] max-w-md mx-auto">
-          {selectedCardId
-            ? 'Енді ауыстырғың келетін екінші карточканы бас!'
-            : 'Карточкаларды сүйреп немесе кезекпен екі карточканы басып ауыстыр.'}
-        </p>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={selectedCardId ? 'hint-selected' : 'hint-default'}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.22 }}
+            className="text-xs sm:text-sm text-[#94A3B8] max-w-md mx-auto"
+          >
+            {selectedCardId
+              ? 'Енді ауыстырғың келетін екінші карточканы бас!'
+              : 'Карточкаларды сүйреп немесе кезекпен екі карточканы басып ауыстыр.'}
+          </motion.p>
+        </AnimatePresence>
       </div>
 
       {/* Main Sortable Area */}
@@ -201,19 +210,27 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
           >
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5 w-full max-w-6xl justify-items-stretch">
               {items.map((era, index) => (
-                <SortableEraCard
+                <motion.div
                   key={era.id}
-                  era={era}
-                  orderIndex={index}
-                  totalCards={items.length}
-                  isSuccess={isSuccess}
-                  hasError={hasError}
-                  disabled={isSuccess}
-                  isSelected={selectedCardId === era.id}
-                  onCardClick={() => handleCardClick(era.id)}
-                  onMoveLeft={() => handleMoveLeft(index)}
-                  onMoveRight={() => handleMoveRight(index)}
-                />
+                  layout
+                  layoutId={era.id}
+                  transition={{
+                    layout: { type: 'spring', stiffness: 420, damping: 32, mass: 0.8 },
+                  }}
+                >
+                  <SortableEraCard
+                    era={era}
+                    orderIndex={index}
+                    totalCards={items.length}
+                    isSuccess={isSuccess}
+                    hasError={hasError}
+                    disabled={isSuccess}
+                    isSelected={selectedCardId === era.id}
+                    onCardClick={() => handleCardClick(era.id)}
+                    onMoveLeft={() => handleMoveLeft(index)}
+                    onMoveRight={() => handleMoveRight(index)}
+                  />
+                </motion.div>
               ))}
             </div>
           </SortableContext>
