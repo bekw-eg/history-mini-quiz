@@ -9,13 +9,25 @@ export type ScreenType =
   | 'game3'
   | 'final';
 
-export type EraId = 'cognitive' | 'neolithic' | 'agrarian' | 'industrial' | 'modern';
+export type EraId =
+  | 'cognitive'
+  | 'neolithic'
+  | 'agrarian'
+  | 'manufacturing'
+  | 'industrial'
+  | 'modern';
 
 export interface EraItem {
   id: EraId;
   order: number;
   nameKz: string;
-  iconName: 'LightBulbIcon' | 'HomeIcon' | 'MapIcon' | 'Cog6ToothIcon' | 'GlobeAltIcon';
+  iconName:
+    | 'LightBulbIcon'
+    | 'HomeIcon'
+    | 'BuildingLibraryIcon'
+    | 'Cog6ToothIcon'
+    | 'BuildingOffice2Icon'
+    | 'GlobeAltIcon';
   periodKz: string;
   shortDescKz: string;
 }
@@ -31,7 +43,13 @@ export interface PersonalityFactor {
   id: string;
   nameKz: string;
   isCorrect: boolean;
-  iconName?: 'HomeIcon' | 'AcademicCapIcon' | 'UserGroupIcon' | 'BuildingLibraryIcon' | 'DevicePhoneMobileIcon' | 'HeartIcon';
+  iconName?:
+    | 'HomeIcon'
+    | 'AcademicCapIcon'
+    | 'UserGroupIcon'
+    | 'BuildingLibraryIcon'
+    | 'DevicePhoneMobileIcon'
+    | 'HeartIcon';
   descKz?: string;
 }
 

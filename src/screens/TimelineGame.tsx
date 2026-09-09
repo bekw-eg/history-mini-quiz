@@ -34,8 +34,8 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
   // Always shuffle initially so cards are not in correct order
   const [items, setItems] = useState<EraItem[]>(() => {
     const shuffled = [...ERAS_DATA];
-    // Guaranteed non-sorted initial state: e.g. [industrial, cognitive, modern, neolithic, agrarian]
-    return [shuffled[3], shuffled[0], shuffled[4], shuffled[1], shuffled[2]];
+    // Guaranteed non-sorted initial state with 6 eras
+    return [shuffled[4], shuffled[0], shuffled[3], shuffled[5], shuffled[1], shuffled[2]];
   });
 
   const [isSuccess, setIsSuccess] = useState(false);
@@ -144,7 +144,7 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
             items={items.map((it) => it.id)}
             strategy={horizontalListSortingStrategy}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 w-full max-w-5xl justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 w-full max-w-6xl justify-items-center">
               {items.map((era) => (
                 <SortableEraCard
                   key={era.id}

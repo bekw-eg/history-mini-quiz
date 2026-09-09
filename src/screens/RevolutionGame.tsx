@@ -131,9 +131,9 @@ export const RevolutionGame: React.FC<RevolutionGameProps> = ({ onComplete }) =>
       </div>
 
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        {/* Top: 5 Era Drop Zones */}
-        <div className="w-full mb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 w-full">
+        {/* Top: 6 Era Drop Zones */}
+        <div className="w-full mb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 w-full">
             {ERAS_DATA.map((era) => (
               <DropZone
                 key={era.id}
@@ -184,7 +184,7 @@ export const RevolutionGame: React.FC<RevolutionGameProps> = ({ onComplete }) =>
                 Таңдалатын өзгерістер ({remainingEvents.length})
               </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {remainingEvents.map((event) => (
                 <DraggableEventCard
                   key={event.id}

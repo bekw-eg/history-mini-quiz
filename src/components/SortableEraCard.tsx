@@ -5,8 +5,9 @@ import type { EraItem } from '../types/game';
 import {
   LightBulbIcon,
   HomeIcon,
-  MapIcon,
+  BuildingLibraryIcon,
   Cog6ToothIcon,
+  BuildingOffice2Icon,
   GlobeAltIcon,
   Bars3Icon,
 } from '@heroicons/react/24/outline';
@@ -41,10 +42,8 @@ export const SortableEraCard: React.FC<SortableEraCardProps> = ({
   };
 
   const renderIcon = () => {
-    const iconClass = `w-7 h-7 ${
-      isSuccess
-        ? 'text-[#34D399]'
-        : 'text-[#D6A84B]'
+    const iconClass = `w-6 h-6 sm:w-7 sm:h-7 ${
+      isSuccess ? 'text-[#34D399]' : 'text-[#D6A84B]'
     } transition-colors`;
 
     switch (era.iconName) {
@@ -52,10 +51,12 @@ export const SortableEraCard: React.FC<SortableEraCardProps> = ({
         return <LightBulbIcon className={iconClass} aria-hidden="true" />;
       case 'HomeIcon':
         return <HomeIcon className={iconClass} aria-hidden="true" />;
-      case 'MapIcon':
-        return <MapIcon className={iconClass} aria-hidden="true" />;
+      case 'BuildingLibraryIcon':
+        return <BuildingLibraryIcon className={iconClass} aria-hidden="true" />;
       case 'Cog6ToothIcon':
         return <Cog6ToothIcon className={iconClass} aria-hidden="true" />;
+      case 'BuildingOffice2Icon':
+        return <BuildingOffice2Icon className={iconClass} aria-hidden="true" />;
       case 'GlobeAltIcon':
         return <GlobeAltIcon className={iconClass} aria-hidden="true" />;
       default:
@@ -69,8 +70,12 @@ export const SortableEraCard: React.FC<SortableEraCardProps> = ({
       style={style}
       {...attributes}
       {...listeners}
-      className={`relative w-full sm:w-[190px] md:w-[210px] h-[120px] sm:h-[130px] rounded-[20px] p-4 flex flex-col justify-between select-none touch-none transition-all duration-200 ${
-        disabled ? 'cursor-default' : isDragging ? 'cursor-grabbing scale-105 shadow-[0_20px_40px_rgba(0,0,0,0.8)]' : 'cursor-grab hover:-translate-y-1 shadow-lg'
+      className={`relative w-full sm:w-[150px] md:w-[165px] lg:w-[172px] h-[120px] sm:h-[132px] rounded-[20px] p-3.5 flex flex-col justify-between select-none touch-none transition-all duration-200 ${
+        disabled
+          ? 'cursor-default'
+          : isDragging
+          ? 'cursor-grabbing scale-105 shadow-[0_20px_40px_rgba(0,0,0,0.8)] z-50'
+          : 'cursor-grab hover:-translate-y-1 shadow-lg'
       } ${
         isSuccess
           ? 'bg-[#34D399]/10 border-2 border-[#34D399] shadow-[0_0_20px_rgba(52,211,153,0.3)]'
@@ -81,9 +86,11 @@ export const SortableEraCard: React.FC<SortableEraCardProps> = ({
     >
       {/* Top row: Icon and indicator */}
       <div className="flex items-center justify-between">
-        <div className={`p-2 rounded-xl border ${
-          isSuccess ? 'bg-[#34D399]/20 border-[#34D399]/40' : 'bg-white/[0.04] border-white/[0.08]'
-        }`}>
+        <div
+          className={`p-2 rounded-xl border ${
+            isSuccess ? 'bg-[#34D399]/20 border-[#34D399]/40' : 'bg-white/[0.04] border-white/[0.08]'
+          }`}
+        >
           {renderIcon()}
         </div>
 
@@ -98,7 +105,7 @@ export const SortableEraCard: React.FC<SortableEraCardProps> = ({
 
       {/* Bottom title */}
       <div>
-        <h3 className="text-base font-bold text-[#F8FAFC] tracking-tight">
+        <h3 className="text-sm sm:text-base font-bold text-[#F8FAFC] tracking-tight truncate">
           {era.nameKz}
         </h3>
         <p className="text-[11px] text-[#94A3B8] truncate">
