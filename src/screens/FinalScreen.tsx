@@ -161,7 +161,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
           >
             <div className="inline-flex items-center gap-2 text-xs font-bold text-[#38BDF8] uppercase tracking-wider mb-2">
               <InformationCircleIcon className="w-4 h-4" aria-hidden="true" />
-              <span>Аудиториямен талқылау сұрағы</span>
+              <span>Қорытынды ой толғау</span>
             </div>
 
             <p className="text-base sm:text-lg font-bold text-[#F8FAFC] mb-1.5">

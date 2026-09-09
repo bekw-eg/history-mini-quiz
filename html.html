@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адам, қоғам және өркениет эволюциясы</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Modern Dark Theme Setup */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #030712;
+            color: #f9fafb;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 30px 0;
+        }
+
+        /* Fixed 16:9 Slide Container */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background: linear-gradient(135deg, #0f172a 0%, #030712 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 2px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 50px;
+            justify-content: space-between;
+        }
+
+        /* Background Glow Decorative Shapes */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Typography */
+        h1, h2, h3, .heading-font {
+            font-family: 'Unbounded', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .slide-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-transform: uppercase;
+        }
+
+        .slide-title span {
+            color: #38bdf8;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        /* Key Pill Badge for Quest */
+        .quest-key {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid #f59e0b;
+            color: #fbbf24;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Unbounded', sans-serif;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+
+        /* Card Elements */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Speaker Notes Panel (Bottom of slide) */
+        .speaker-notes {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .speaker-notes i {
+            color: #38bdf8;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        .speaker-notes strong {
+            color: #f8fafc;
+        }
+
+        /* Grid Layout Utilities */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+        /* Question Banner */
+        .question-box {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.15) 0%, rgba(234, 88, 12, 0.1) 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 12px 20px;
+            border-radius: 0 10px 10px 0;
+            color: #fef08a;
+            font-size: 15px;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        /* Highlight Text */
+        .accent-gold { color: #fbbf24; }
+        .accent-blue { color: #38bdf8; }
+        .accent-green { color: #34d399; }
+        .accent-purple { color: #c084fc; }
+
+        /* Interactive Elements / Timeline */
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #1e293b;
+            border: 2px solid #38bdf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #38bdf8;
+            margin-bottom: 12px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide-container" id="slide1">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: #64748b; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Университеттік презентация</span>
+        <span class="quest-key"><i class="fa-solid fa-gamepad"></i> Квест-презентация</span>
+    </div>
+
+    <div class="content-area" style="text-align: center; align-items: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 15px; background: rgba(30, 41, 59, 0.5); padding: 12px 30px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1);">
+            <span>🦴 Алғашқы адам</span>
+            <i class="fa-solid fa-chevron-right accent-gold"></i>
+            <span>🏛 Ежелгі өркениет</span>
+            <i class="fa-solid fa-chevron-right accent-gold"></i>
+            <span>🏭 Индустриалды қала</span>
+            <i class="fa-solid fa-chevron-right accent-blue"></i>
+            <span>🌐 Цифрлық тұлға</span>
+        </div>
+
+        <h1 style="font-size: 42px; line-height: 1.2; color: #ffffff; max-width: 1000px;">
+            АДАМ <span class="accent-gold">→</span> ҚОҒАМ <span class="accent-gold">→</span> ӨРКЕНИЕТ <span class="accent-blue">→</span> ТҰЛҒА
+        </h1>
+        
+        <p style="font-size: 20px; color: #94a3b8; max-width: 800px;">
+            Адам, қоғам және өркениет эволюциясы. Тұлғаның дүниетанымдық мәдениетін қалыптастыру моделі
+        </p>
+
+        <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; padding: 16px 32px; border-radius: 12px; margin-top: 10px;">
+            <p style="font-size: 18px; color: #e0f2fe; font-weight: 600;">
+                <i class="fa-solid fa-circle-question accent-blue"></i> Бізді кім қалыптастырады: тарих па, қоғам ба, әлде өзіміз бе?
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 2: CULTURE VS CIVILIZATION -->
+<div class="slide-container" id="slide2">
+    <div class="slide-title">
+        <span>02</span> МӘДЕНИЕТ ЖӘНЕ ӨРКЕНИЕТ
+    </div>
+
+    <div class="content-area">
+        <div class="grid-2" style="align-items: center;">
+            <div class="glass-card" style="border-left: 4px solid #fbbf24;">
+                <h3 style="font-size: 24px; color: #fbbf24; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-palette"></i> МӘДЕНИЕТ (Рухани)
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; font-size: 18px;">
+                    <div>🎨 Өнер мен эстетика</div>
+                    <div>🗣 Тіл мен философия</div>
+                    <div>🎵 Музыка мен әдебиет</div>
+                    <div>📚 Білім мен ғылым</div>
+                    <div style="grid-column: span 2;">🏺 Дәстүр мен құндылықтар</div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #38bdf8;">
+                <h3 style="font-size: 24px; color: #38bdf8; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-city"></i> ӨРКЕНИЕТ (Материалдық)
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; font-size: 18px;">
+                    <div>🏙 Қалалар мен инфрақұрылым</div>
+                    <div>🏛 Мемлекеттік жүйе</div>
+                    <div>⚖ Заң мен тәртіп</div>
+                    <div>⚙ Технология мен өндіріс</div>
+                    <div style="grid-column: span 2;">💰 Экономика мен инфрақұрылым</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: HUMAN EVOLUTION TIMELINE -->
+<div class="slide-container" id="slide3">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="slide-title"><span>03</span> АДАМЗАТТЫҢ ЭВОЛЮЦИЯ ЖОЛЫ</div>
+        <span class="quest-key">🔑 Когнитивтік</span>
+    </div>
+
+    <div class="content-area">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; position: relative; margin: 40px 0;">
+            <div style="position: absolute; top: 32px; left: 50px; right: 50px; height: 3px; background: linear-gradient(90deg, #fbbf24, #38bdf8); z-index: 0;"></div>
+
+            <div class="timeline-step" style="z-index: 1; flex: 1;">
+                <div class="timeline-icon" style="border-color: #fbbf24; color: #fbbf24;"><i class="fa-solid fa-brain"></i></div>
+                <h4 style="font-size: 16px; color: #fbbf24;">Когнитивтік</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Тіл мен ойлау</p>
+            </div>
+
+            <div class="timeline-step" style="z-index: 1; flex: 1;">
+                <div class="timeline-icon" style="border-color: #f59e0b; color: #f59e0b;"><i class="fa-solid fa-wheat-awn"></i></div>
+                <h4 style="font-size: 16px; color: #f59e0b;">Неолиттік</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Егіншілік пен қоныс</p>
+            </div>
+
+            <div class="timeline-step" style="z-index: 1; flex: 1;">
+                <div class="timeline-icon" style="border-color: #10b981; color: #10b981;"><i class="fa-solid fa-landmark"></i></div>
+                <h4 style="font-size: 16px; color: #10b981;">Аграрлық</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Мемлекеттер пайда болуы</p>
+            </div>
+
+            <div class="timeline-step" style="z-index: 1; flex: 1;">
+                <div class="timeline-icon" style="border-color: #06b6d4; color: #06b6d4;"><i class="fa-solid fa-gear"></i></div>
+                <h4 style="font-size: 16px; color: #06b6d4;">Өнеркәсіптік</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Бу машинасы мен өндіріс</p>
+            </div>
+
+            <div class="timeline-step" style="z-index: 1; flex: 1;">
+                <div class="timeline-icon" style="border-color: #38bdf8; color: #38bdf8;"><i class="fa-solid fa-industry"></i></div>
+                <h4 style="font-size: 16px; color: #38bdf8;">Индустриалды</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Жаппай өндіріс</p>
+            </div>
+
+            <div class="timeline-step" style="z-index: 1; flex: 1;">
+                <div class="timeline-icon" style="border-color: #a855f7; color: #a855f7;"><i class="fa-solid fa-globe"></i></div>
+                <h4 style="font-size: 16px; color: #a855f7;">Қазіргі қоғам</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Цифрлық дәуір</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: COGNITIVE REVOLUTION -->
+<div class="slide-container" id="slide4">
+    <div class="slide-title">
+        <span>04</span> КОГНИТИВТІК РЕВОЛЮЦИЯ
+    </div>
+
+    <div class="content-area">
+        <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid #fbbf24; border-radius: 16px; padding: 18px; text-align: center; margin-bottom: 25px;">
+            <span style="font-size: 26px; font-weight: 700; color: #fbbf24; font-family: 'Unbounded', sans-serif;">
+                🗣 ТІЛ <span style="color: #fff;">→</span> 🧠 ОЙЛАУ <span style="color: #fff;">→</span> 🤝 БІРЛЕСУ
+            </span>
+        </div>
+
+        <div class="grid-4">
+            <div class="glass-card" style="text-align: center;">
+                <i class="fa-solid fa-comments" style="font-size: 36px; color: #38bdf8; margin-bottom: 15px;"></i>
+                <h4 style="font-size: 18px; color: #fff; margin-bottom: 8px;">Күрделі тіл</h4>
+                <p style="font-size: 14px; color: #94a3b8;">Дерексіз ұғымдарды білдіру қабілеті</p>
+            </div>
+
+            <div class="glass-card" style="text-align: center;">
+                <i class="fa-solid fa-paint-brush" style="font-size: 36px; color: #f59e0b; margin-bottom: 15px;"></i>
+                <h4 style="font-size: 18px; color: #fff; margin-bottom: 8px;">Үңгір суреттері</h4>
+                <p style="font-size: 14px; color: #94a3b8;">Алғашқы визуальды ақпарат пен өнер</p>
+            </div>
+
+            <div class="glass-card" style="text-align: center;">
+                <i class="fa-solid fa-fire" style="font-size: 36px; color: #ef4444; margin-bottom: 15px;"></i>
+                <h4 style="font-size: 18px; color: #fff; margin-bottom: 8px;">От айналасы</h4>
+                <p style="font-size: 14px; color: #94a3b8;">Тәжірибе мен аңыздарды жеткізу</p>
+            </div>
+
+            <div class="glass-card" style="text-align: center;">
+                <i class="fa-solid fa-users" style="font-size: 36px; color: #10b981; margin-bottom: 15px;"></i>
+                <h4 style="font-size: 18px; color: #fff; margin-bottom: 8px;">Үлкен топтар</h4>
+                <p style="font-size: 14px; color: #94a3b8;">Жүзден аса адамның бірігіп аң аулауы</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <p style="font-size: 22px; color: #f8fafc; font-weight: 600;">
+                «Адам басқа тірі ағзалардан ақпаратпен бөлісу арқылы озып шықты.»
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: NEOLITHIC REVOLUTION -->
+<div class="slide-container" id="slide5">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="slide-title"><span>05</span> НЕОЛИТТІК РЕВОЛЮЦИЯ</div>
+        <span class="quest-key">🔑 Неолиттік</span>
+    </div>
+
+    <div class="content-area">
+        <div class="grid-2" style="align-items: center; position: relative;">
+            <div class="glass-card" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3);">
+                <h3 style="color: #f87171; font-size: 22px; margin-bottom: 15px; text-align: center;">
+                    <i class="fa-solid fa-person-hunting"></i> АҢШЫ ЖӘНЕ ТЕРІМШІ
+                </h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px;">
+                    <li><i class="fa-solid fa-xmark" style="color: #f87171;"></i> Көшпелі өмір салты</li>
+                    <li><i class="fa-solid fa-xmark" style="color: #f87171;"></i> Табиғатқа толық тәуелділік</li>
+                    <li><i class="fa-solid fa-xmark" style="color: #f87171;"></i> Азық-түлік қорының болмауы</li>
+                </ul>
+            </div>
+
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #f59e0b; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #000; box-shadow: 0 0 20px rgba(245, 158, 11, 0.5); z-index: 2;">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+
+            <div class="glass-card" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3);">
+                <h3 style="color: #34d399; font-size: 22px; margin-bottom: 15px; text-align: center;">
+                    <i class="fa-solid fa-wheat-awn"></i> ДИҚАН ЖӘНЕ ОПЫРАҚШЫ
+                </h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px;">
+                    <li><i class="fa-solid fa-check" style="color: #34d399;"></i> 🌾 Егіншілік пен мал шаруашылығы</li>
+                    <li><i class="fa-solid fa-check" style="color: #34d399;"></i> 🏠 Тұрақты қоныстар мен үйлер</li>
+                    <li><i class="fa-solid fa-check" style="color: #34d399;"></i> 🏺 Артық азық-түлік қоры мен сауда</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="background: rgba(30, 41, 59, 0.8); padding: 16px; border-radius: 12px; text-align: center; margin-top: 25px; border: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 20px; color: #fbbf24; font-weight: 600;">
+                «Адам табиғатқа бейімделуден оны өзіне ыңғайлап өзгерттуге өтті.»
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: AGRARIAN CIVILIZATIONS -->
+<div class="slide-container" id="slide6">
+    <div class="slide-title">
+        <span>06</span> АГРАРЛЫҚ ӨРКЕНИЕТТЕР
+    </div>
+
+    <div class="content-area">
+        <div class="grid-3" style="gap: 16px;">
+            <div class="glass-card" style="border-top: 3px solid #eab308;">
+                <h4 style="font-size: 18px; color: #eab308; margin-bottom: 8px;">🏛 Египет</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Пирамидалар, монументалды сәулет, мемлекеттік иерархия</p>
+            </div>
+
+            <div class="glass-card" style="border-top: 3px solid #06b6d4;">
+                <h4 style="font-size: 18px; color: #06b6d4; margin-bottom: 8px;">📜 Месопотамия</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Шынауи жазу (клинопись), алғашқы заңдар жинағы</p>
+            </div>
+
+            <div class="glass-card" style="border-top: 3px solid #10b981;">
+                <h4 style="font-size: 18px; color: #10b981; margin-bottom: 8px;">🏙 Үндістан (Хараппа)</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Жоспарланған қалалар, су құбыры жүйесі</p>
+            </div>
+
+            <div class="glass-card" style="border-top: 3px solid #f43f5e;">
+                <h4 style="font-size: 18px; color: #f43f5e; margin-bottom: 8px;">🐉 Қытай</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Орталықтандырылған империя, Ұлы Қорған</p>
+            </div>
+
+            <div class="glass-card" style="border-top: 3px solid #a855f7; grid-column: span 2;">
+                <h4 style="font-size: 18px; color: #a855f7; margin-bottom: 8px;">🏛 Грекия мен Рим</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Демократия, азаматтық құқық, философия және құқықтық мемлекет негіздері</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: INDUSTRIAL REVOLUTION -->
+<div class="slide-container" id="slide7">
+    <div class="slide-title">
+        <span>07</span> ӨНЕРКӘСІПТІК РЕВОЛЮЦИЯ
+    </div>
+
+    <div class="content-area">
+        <div class="grid-2" style="align-items: center;">
+            <div class="glass-card" style="text-align: center;">
+                <i class="fa-solid fa-horse" style="font-size: 40px; color: #f59e0b; margin-bottom: 12px;"></i>
+                <h4 style="font-size: 20px; color: #f59e0b; margin-bottom: 10px;">ДӘСТҮРЛІ КЕЗЕҢ</h4>
+                <p style="font-size: 15px; color: #94a3b8;">🌾 Ауылдық өмір • 🐎 Ат көлігі • 🧑‍🌾 Қол еңбегі</p>
+            </div>
+
+            <div class="glass-card" style="text-align: center; border-color: #38bdf8;">
+                <i class="fa-solid fa-industry" style="font-size: 40px; color: #38bdf8; margin-bottom: 12px;"></i>
+                <h4 style="font-size: 20px; color: #38bdf8; margin-bottom: 10px;">ІНДУСТРИАЛДЫ ДӘУІР</h4>
+                <p style="font-size: 15px; color: #94a3b8;">🏭 Фабрикалар • 🚂 Теміржол • ⚙ Машиналар</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; padding: 20px; border-radius: 16px;">
+            <p style="font-size: 22px; color: #f8fafc; font-weight: 600;">
+                «Машина тек өндірісті емес, адамның өмір салты мен уақытты қабылдауын өзгертті.»
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: ANCIENT VS MODERN SOCIETY -->
+<div class="slide-container" id="slide8">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="slide-title"><span>08</span> ЕЖЕЛГІ ҚОҒАМ VS ҚАЗІРГІ ҚОҒАМ</div>
+        <span class="quest-key">🔑 Өркениет</span>
+    </div>
+
+    <div class="content-area">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="glass-card" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px;">
+                <span style="font-size: 18px; color: #fbbf24;">🐎 Көлік: Ат арба</span>
+                <span style="font-size: 16px; color: #64748b; font-weight: bold;">↔</span>
+                <span style="font-size: 18px; color: #38bdf8;">✈️ Көлік: Ұшақ пен электромобиль</span>
+            </div>
+
+            <div class="glass-card" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px;">
+                <span style="font-size: 18px; color: #fbbf24;">📜 Ақпарат: Пергамент хат</span>
+                <span style="font-size: 16px; color: #64748b; font-weight: bold;">↔</span>
+                <span style="font-size: 18px; color: #38bdf8;">📱 Ақпарат: Смартфон мен Интернет</span>
+            </div>
+
+            <div class="glass-card" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px;">
+                <span style="font-size: 18px; color: #fbbf24;">🕯 Жарық: Майшам мен от</span>
+                <span style="font-size: 16px; color: #64748b; font-weight: bold;">↔</span>
+                <span style="font-size: 18px; color: #38bdf8;">💡 Жарық: Электр мен ЖИ энергиясы</span>
+            </div>
+
+            <div class="glass-card" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px;">
+                <span style="font-size: 18px; color: #fbbf24;">🧑‍🌾 Еңбек: Ауыр қол еңбегі</span>
+                <span style="font-size: 16px; color: #64748b; font-weight: bold;">↔</span>
+                <span style="font-size: 18px; color: #38bdf8;">🤖 Еңбек: Автоматтандыру мен Роботтар</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <p style="font-size: 18px; color: #e2e8f0;">
+                «Қоғам мен технология өзгерген сайын адамның ойлау түйсігі де өзгереді.»
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 9: PIVOT SLIDE -->
+<div class="slide-container" id="slide9" style="background: radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);">
+    <div class="content-area" style="text-align: center; align-items: center; justify-content: center; gap: 30px;">
+        <div style="font-size: 60px; color: #38bdf8; animation: pulse 2s infinite;">
+            <i class="fa-solid fa-user-astronaut"></i>
+        </div>
+
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+            <span class="glass-card" style="padding: 8px 16px; font-size: 15px;">👨‍👩‍👧 Отбасы</span>
+            <span class="glass-card" style="padding: 8px 16px; font-size: 15px;">🏫 Білім</span>
+            <span class="glass-card" style="padding: 8px 16px; font-size: 15px;">👥 Қоғам</span>
+            <span class="glass-card" style="padding: 8px 16px; font-size: 15px;">🏛 Мемлекет</span>
+            <span class="glass-card" style="padding: 8px 16px; font-size: 15px;">📱 БАҚ / Интернет</span>
+        </div>
+
+        <div style="max-width: 900px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); padding: 30px; border-radius: 24px;">
+            <h2 style="font-size: 32px; color: #fbbf24; line-height: 1.3;">
+                «Өркениет мен технология өзгерді.<br>Ал АДАМНЫҢ ӨЗІ қалай қалыптасады?»
+            </h2>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: VALUES SYSTEM -->
+<div class="slide-container" id="slide10">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="slide-title"><span>10</span> ТҰЛҒАНЫҢ ҚҰНДЫЛЫҚТАР СЕКТОРЫ</div>
+        <span class="quest-key">🔑 Құндылық</span>
+    </div>
+
+    <div class="content-area">
+        <div style="position: relative; display: flex; justify-content: center; align-items: center; min-height: 320px;">
+            <div style="background: linear-gradient(135deg, #38bdf8, #818cf8); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #000; box-shadow: 0 0 30px rgba(56, 189, 248, 0.4); z-index: 2;">
+                👤 ТҰЛҒА
+            </div>
+
+            <div class="grid-3" style="position: absolute; width: 100%; gap: 180px 20px;">
+                <div class="glass-card" style="text-align: center; border-color: #f43f5e;">❤️ Адамгершілік</div>
+                <div class="glass-card" style="text-align: center; border-color: #38bdf8;">⚖ Әділеттілік</div>
+                <div class="glass-card" style="text-align: center; border-color: #10b981;">🤝 Құрмет мен Сезім</div>
+                <div class="glass-card" style="text-align: center; border-color: #f59e0b;">🧠 Жауапкершілік</div>
+                <div class="glass-card" style="text-align: center; border-color: #a855f7;">🕊 Еркіндік</div>
+                <div class="glass-card" style="text-align: center; border-color: #ec4899;">👨‍👩‍👧 Отбасы бағасы</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <p style="font-size: 20px; color: #fbbf24; font-weight: 600;">
+                «Құндылықтар — адамның кез келген шешім қабылдауына бағыт беретін ішкі компасы.»
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 11: WHO FORMS PERSONALITY? -->
+<div class="slide-container" id="slide11">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="slide-title"><span>11</span> ТҰЛҒАНЫ КІМ ҚАЛЫПТАСТЫРАДЫ?</div>
+        <div style="display: flex; gap: 8px;">
+            <span class="quest-key">🔑 Отбасы</span>
+            <span class="quest-key">🔑 Білім</span>
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div class="grid-3" style="gap: 16px;">
+            <div class="glass-card" style="border-left: 4px solid #ec4899;">
+                <h4 style="font-size: 18px; color: #ec4899; margin-bottom: 6px;">👨‍👩‍👧 1. ОТБАСЫ</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Алғашқы тәрбие, эмоционалды қауіпсіздік және базалық құндылықтар</p>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #38bdf8;">
+                <h4 style="font-size: 18px; color: #38bdf8; margin-bottom: 6px;">🏫 2. БІЛІМ</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Жүйелі білім, сын тұрғысынан ойлау, кәсіби дағдылар</p>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #10b981;">
+                <h4 style="font-size: 18px; color: #10b981; margin-bottom: 6px;">👥 3. ҚОҒАМ</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Әлеуметтік орта, достық, нормалар мен дәстүрлер</p>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #f59e0b;">
+                <h4 style="font-size: 18px; color: #f59e0b; margin-bottom: 6px;">🏛 4. МЕМЛЕКЕТ</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Заңдар, азаматтық жауапкершілік және құқықтық мәдениет</p>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #a855f7; grid-column: span 2;">
+                <h4 style="font-size: 18px; color: #a855f7; margin-bottom: 6px;">📱 5. БАҚ ЖӘНЕ ИНТЕРНЕТ</h4>
+                <p style="font-size: 14px; color: #cbd5e1;">Ақпараттық ағын, медиасауаттылық, жаһандық трендтер мен көзқарастар</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 12: FORMATION MODEL OF WORLDVIEW -->
+<div class="slide-container" id="slide12">
+    <div class="slide-title">
+        <span>12</span> ТҰЛҒАНЫҢ ҚАЛЫПТАСУ МОДЕЛІ
+    </div>
+
+    <div class="content-area">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <div style="display: flex; gap: 10px; background: rgba(30, 41, 59, 0.6); padding: 12px 24px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1);">
+                <span>👨‍👩‍👧 Отбасы</span> + <span>🏫 Білім</span> + <span>👥 Қоғам</span> + <span>🏛 Мемлекет</span> + <span>🌐 БАҚ</span>
+            </div>
+
+            <i class="fa-solid fa-arrow-down" style="font-size: 24px; color: #38bdf8;"></i>
+
+            <div class="glass-card" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2)); border: 2px solid #38bdf8; padding: 16px 40px; text-align: center;">
+                <h3 style="font-size: 22px; color: #fff;">👤 ТҰЛҒА (Ішкі Таңдау мен Рефлексия)</h3>
+            </div>
+
+            <i class="fa-solid fa-arrow-down" style="font-size: 24px; color: #38bdf8;"></i>
+
+            <div class="grid-4" style="width: 100%;">
+                <div class="glass-card" style="text-align: center; border-top: 3px solid #fbbf24;">
+                    <strong style="color: #fbbf24; font-size: 16px;">ДҮНИЕТАНЫМ</strong>
+                    <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Өмірлік көзқарас</p>
+                </div>
+                <div class="glass-card" style="text-align: center; border-top: 3px solid #38bdf8;">
+                    <strong style="color: #38bdf8; font-size: 16px;">МОРАЛЬ</strong>
+                    <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Жақсы мен жаман</p>
+                </div>
+                <div class="glass-card" style="text-align: center; border-top: 3px solid #34d399;">
+                    <strong style="color: #34d399; font-size: 16px;">ҚҰНДЫЛЫҚ</strong>
+                    <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Негізгі приоритет</p>
+                </div>
+                <div class="glass-card" style="text-align: center; border-top: 3px solid #c084fc;">
+                    <strong style="color: #c084fc; font-size: 16px;">МІНЕЗ-ҚҰЛЫҚ</strong>
+                    <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Нақты іс-әрекет</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <p style="font-size: 17px; color: #e2e8f0; font-weight: 500;">
+                «Тұлға сыртқы ортадан әсер алады, бірақ өз таңдауын өзі жасайды.»
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 13: FINAL QUEST & SUMMARY -->
+<div class="slide-container" id="slide13" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="slide-title"><span>13</span> ФИНАЛЬДЫ КВЕСТ ЖӘНЕ ИНТЕРАКТИВ</div>
+        <span class="quest-key" style="background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">
+            <i class="fa-solid fa-trophy"></i> Барлық кілттер жиналды!
+        </span>
+    </div>
+
+    <div class="content-area">
+        <div style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 16px; margin-bottom: 20px;">
+            <p style="font-size: 14px; color: #94a3b8; text-align: center; margin-bottom: 8px;">ЖИНАЛҒАН КІЛТ СӨЗДЕР:</p>
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <span class="quest-key">🔑 Когнитивтік</span>
+                <span class="quest-key">🔑 Неолиттік</span>
+                <span class="quest-key">🔑 Өркениет</span>
+                <span class="quest-key">🔑 Құндылық</span>
+                <span class="quest-key">🔑 Отбасы</span>
+                <span class="quest-key">🔑 Білім</span>
+            </div>
+        </div>
+
+        <div class="grid-2" style="gap: 20px;">
+            <div class="glass-card" style="text-align: center; border-color: #38bdf8;">
+                <i class="fa-solid fa-laptop-code" style="font-size: 32px; color: #38bdf8; margin-bottom: 10px;"></i>
+                <h4 style="font-size: 18px; color: #fff;">1-ОЙЫН: Хронология</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Эволюция кезеңдерін ретімен орналастыру</p>
+            </div>
+
+            <div class="glass-card" style="text-align: center; border-color: #fbbf24;">
+                <i class="fa-solid fa-puzzle-piece" style="font-size: 32px; color: #fbbf24; margin-bottom: 10px;"></i>
+                <h4 style="font-size: 18px; color: #fff;">2-ОЙЫН: Модель құрау</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">Тұлғаны қалыптастырушы факторларды сәйкестендіру</p>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(90deg, rgba(245, 158, 11, 0.2), rgba(56, 189, 248, 0.2)); border: 2px solid #fbbf24; padding: 18px; border-radius: 16px; text-align: center; margin-top: 20px;">
+            <h3 style="font-size: 20px; color: #ffffff; font-family: 'Unbounded', sans-serif;">
+                «ӨРКЕНИЕТ ҚОҒАМДЫ ӨЗГЕРТЕДІ. ҚҰНДЫЛЫҚ АДАМДЫ ҚАЛЫПТАСТЫРАДЫ.»
+            </h3>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
