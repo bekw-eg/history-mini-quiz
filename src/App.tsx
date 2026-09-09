@@ -4,6 +4,7 @@ import type { ScreenType } from './types/game';
 import { BackgroundFX } from './components/BackgroundFX';
 import { Header } from './components/Header';
 import { KeyModalTransition } from './components/KeyModalTransition';
+import { GlossaryModal } from './components/GlossaryModal';
 import { IntroScreen } from './screens/IntroScreen';
 import { TimelineGame } from './screens/TimelineGame';
 import { RevolutionGame } from './screens/RevolutionGame';
@@ -13,6 +14,7 @@ import { FinalScreen } from './screens/FinalScreen';
 
 export const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<ScreenType>('intro');
+  const [isGlossaryOpen, setIsGlossaryOpen] = useState(false);
 
   const restartGame = () => {
     setCurrentScreen('intro');
@@ -45,12 +47,13 @@ export const App: React.FC = () => {
       {/* Ambient background glows */}
       <BackgroundFX />
 
-      {/* Persistent top minimal header */}
+      {/* Persistent top minimal header with Glossary button */}
       {showHeader && (
         <Header
           currentStep={getStepNumber()}
           totalSteps={3}
           showProgress={true}
+          onOpenGlossary={() => setIsGlossaryOpen(true)}
         />
       )}
 
@@ -176,11 +179,20 @@ export const App: React.FC = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
-              <FinalScreen onRestart={restartGame} />
+              <FinalScreen
+                onRestart={restartGame}
+                onOpenGlossary={() => setIsGlossaryOpen(true)}
+              />
             </motion.div>
           )}
         </AnimatePresence>
       </main>
+
+      {/* Global Interactive Glossary Modal */}
+      <GlossaryModal
+        isOpen={isGlossaryOpen}
+        onClose={() => setIsGlossaryOpen(false)}
+      />
     </div>
   );
 };

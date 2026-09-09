@@ -3,6 +3,7 @@ import {
   GlobeAltIcon,
   ArrowsPointingOutIcon,
   ArrowsPointingInIcon,
+  BookOpenIcon,
 } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 
@@ -10,12 +11,14 @@ interface HeaderProps {
   currentStep: number; // 1, 2, or 3
   totalSteps?: number;
   showProgress?: boolean;
+  onOpenGlossary?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentStep,
   totalSteps = 3,
   showProgress = true,
+  onOpenGlossary,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const progressPercent = Math.min(100, Math.max(0, (currentStep / totalSteps) * 100));
@@ -56,8 +59,20 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Right tools: Fullscreen button & progress tracker */}
-        <div className="flex items-center gap-4">
+        {/* Right tools: Glossary button, Fullscreen button & progress tracker */}
+        <div className="flex items-center gap-2.5 sm:gap-4">
+          {onOpenGlossary && (
+            <button
+              type="button"
+              onClick={onOpenGlossary}
+              title="Терминдер глоссарийі"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.12] text-xs font-semibold text-[#D6A84B] hover:text-[#fbbf24] transition-colors cursor-pointer"
+            >
+              <BookOpenIcon className="w-4 h-4" aria-hidden="true" />
+              <span className="hidden sm:inline">Глоссарий</span>
+            </button>
+          )}
+
           {showProgress && (
             <div className="text-right">
               <span className="text-xs text-[#94A3B8] font-medium mr-1.5">Тапсырма:</span>

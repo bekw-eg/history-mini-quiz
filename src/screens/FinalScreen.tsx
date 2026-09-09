@@ -5,14 +5,16 @@ import {
   ArrowPathIcon,
   InformationCircleIcon,
   SparklesIcon,
+  BookOpenIcon,
 } from '@heroicons/react/24/outline';
 import { TrophyIcon as TrophyIconSolid } from '@heroicons/react/24/solid';
 
 interface FinalScreenProps {
   onRestart: () => void;
+  onOpenGlossary?: () => void;
 }
 
-export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
+export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart, onOpenGlossary }) => {
   const [phase, setPhase] = useState<number>(0);
 
   useEffect(() => {
@@ -173,16 +175,28 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
           </motion.div>
         )}
 
-        {/* Restart button */}
+        {/* Action buttons: Glossary & Restart */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
+          className="flex flex-wrap items-center justify-center gap-3"
         >
+          {onOpenGlossary && (
+            <button
+              type="button"
+              onClick={onOpenGlossary}
+              className="px-6 h-12 inline-flex items-center justify-center gap-2 rounded-xl bg-[#D6A84B]/15 hover:bg-[#D6A84B]/25 border border-[#D6A84B]/40 text-[#D6A84B] hover:text-[#fbbf24] text-sm font-semibold transition-all duration-200 cursor-pointer shadow-md"
+            >
+              <BookOpenIcon className="w-4 h-4 stroke-[2]" aria-hidden="true" />
+              <span>Терминдер глоссарийі (Қарапайым тілмен)</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={onRestart}
-            className="px-7 h-12 inline-flex items-center justify-center gap-2.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.15] text-[#F8FAFC] text-sm font-semibold transition-all duration-200 cursor-pointer shadow-md"
+            className="px-6 h-12 inline-flex items-center justify-center gap-2.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.15] text-[#F8FAFC] text-sm font-semibold transition-all duration-200 cursor-pointer shadow-md"
           >
             <ArrowPathIcon className="w-4 h-4 stroke-[2]" aria-hidden="true" />
             <span>Қайта бастау</span>

@@ -58,3 +58,12 @@ export interface InternalQuality {
   titleKz: string;
   subtitleKz: string;
 }
+
+export interface GlossaryItem {
+  id: string;
+  termKz: string;
+  category: 'civilization' | 'personality';
+  simpleExplanationKz: string; // 5 жастағы балаға түсіндіргендей
+  academicExplanationKz: string; // Ықшам анықтама
+  iconName: string;
+}
