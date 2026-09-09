@@ -1091,119 +1091,64 @@ const addSlideHeader = (slide, numberStr, titleStr, badgeStr = null) => {
 }
 
 // ==========================================
-// SLIDE 13: FINAL QUEST & SUMMARY
+// SLIDE 13: FINAL QUEST & QR CODE
 // ==========================================
 {
   const s13 = pres.addSlide();
   applySlideBg(s13);
-  addSlideHeader(s13, '13', 'ФИНАЛЬДЫ КВЕСТ ЖӘНЕ ИНТЕРАКТИВ', 'Барлық кілттер жиналды!');
+  addSlideHeader(s13, '13', 'QR • ИНТЕРАКТИВТІ КВЕСТ');
 
-  // Keys box
+  // Center QR Card
   s13.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: 0.8,
+    x: 4.1,
     y: 1.5,
-    w: 11.7,
-    h: 1.1,
+    w: 5.1,
+    h: 5.3,
     fill: { color: C_CARD },
-    line: { color: '334155', width: 1 },
-    rectRadius: 0.2,
+    line: { color: C_CYAN, width: 2 },
+    rectRadius: 0.25,
   });
-  s13.addText('ЖИНАЛҒАН КІЛТ СӨЗДЕР:', {
-    x: 1.0,
-    y: 1.6,
-    w: 11.3,
-    h: 0.35,
-    align: 'center',
-    fontSize: 11,
-    color: C_MUTED,
-    bold: true,
+
+  // White background for QR code
+  s13.addShape(pres.shapes.ROUNDED_RECTANGLE, {
+    x: 4.8,
+    y: 1.8,
+    w: 3.7,
+    h: 3.7,
+    fill: { color: 'FFFFFF' },
+    line: { color: 'E2E8F0', width: 1 },
+    rectRadius: 0.15,
   });
-  s13.addText('Когнитивтік  •  Неолиттік  •  Өркениет  •  Құндылық  •  Отбасы  •  Білім', {
-    x: 1.0,
-    y: 2.0,
-    w: 11.3,
+
+  // Add QR code image
+  s13.addImage({
+    path: 'qr.png',
+    x: 4.95,
+    y: 1.95,
+    w: 3.4,
+    h: 3.4,
+  });
+
+  // Instruction caption
+  s13.addText('Камераны бағыттап, квест-ойынға өтіңіз', {
+    x: 4.2,
+    y: 5.7,
+    w: 4.9,
     h: 0.45,
     align: 'center',
-    fontSize: 14,
-    color: C_GOLD,
+    fontSize: 16,
     bold: true,
-  });
-
-  // 2 Game preview cards
-  s13.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: 0.8,
-    y: 2.9,
-    w: 5.6,
-    h: 2.3,
-    fill: { color: C_CARD },
-    line: { color: C_CYAN, width: 1.5 },
-    rectRadius: 0.2,
-  });
-  s13.addText('1-ОЙЫН: Хронология', {
-    x: 1.1,
-    y: 3.2,
-    w: 5.0,
-    h: 0.5,
-    fontSize: 18,
-    bold: true,
-    color: C_CYAN,
-  });
-  s13.addText('Адамзаттың 6 эволюциялық кезеңін ретімен орналастыру квесті.', {
-    x: 1.1,
-    y: 3.8,
-    w: 5.0,
-    h: 1.1,
-    fontSize: 14,
     color: C_TEXT,
   });
 
-  s13.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: 6.9,
-    y: 2.9,
-    w: 5.6,
-    h: 2.3,
-    fill: { color: C_CARD },
-    line: { color: C_GOLD, width: 1.5 },
-    rectRadius: 0.2,
-  });
-  s13.addText('2-ОЙЫН: Модель құрау', {
-    x: 7.2,
-    y: 3.2,
-    w: 5.0,
-    h: 0.5,
-    fontSize: 18,
-    bold: true,
-    color: C_GOLD,
-  });
-  s13.addText('Тұлғаны қалыптастырушы факторлар мен құндылықтарды таңдау квесті.', {
-    x: 7.2,
-    y: 3.8,
-    w: 5.0,
-    h: 1.1,
-    fontSize: 14,
-    color: C_TEXT,
-  });
-
-  // Final climax quote
-  s13.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: 0.8,
-    y: 5.5,
-    w: 11.7,
-    h: 1.3,
-    fill: { color: '1E293B' },
-    line: { color: C_GOLD, width: 2 },
-    rectRadius: 0.2,
-  });
-  s13.addText('«ӨРКЕНИЕТ ҚОҒАМДЫ ӨЗГЕРТЕДІ.\nҚҰНДЫЛЫҚ АДАМДЫ ҚАЛЫПТАСТЫРАДЫ.»', {
-    x: 1.0,
-    y: 5.5,
-    w: 11.3,
-    h: 1.3,
+  s13.addText('Интерактивті веб-платформа & хронология ойыны', {
+    x: 4.2,
+    y: 6.15,
+    w: 4.9,
+    h: 0.4,
     align: 'center',
-    valign: 'middle',
-    fontSize: 20,
-    bold: true,
-    color: C_TEXT,
+    fontSize: 12,
+    color: C_MUTED,
   });
 }
 
