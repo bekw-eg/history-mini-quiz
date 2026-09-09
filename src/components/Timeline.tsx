@@ -53,7 +53,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 
               {/* Label */}
               <span
-                className={`mt-1.5 text-[11px] sm:text-xs font-medium tracking-tight text-center whitespace-nowrap transition-colors ${
+                className={`mt-1 text-[9px] sm:text-[11px] md:text-xs font-medium tracking-tight text-center max-w-[52px] sm:max-w-none leading-tight transition-colors ${
                   isActive
                     ? 'text-[#38BDF8] font-semibold'
                     : isCompleted

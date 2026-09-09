@@ -45,7 +45,7 @@ export const TransitionScreen: React.FC<TransitionScreenProps> = ({ onContinue }
   ];
 
   return (
-    <div className="relative min-h-[85vh] flex flex-col items-center justify-center px-4 py-8 text-center select-none">
+    <div className="relative min-h-[85vh] flex flex-col items-center justify-center px-4 py-8 text-center select-none overflow-hidden">
       {/* Background purple glow */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
