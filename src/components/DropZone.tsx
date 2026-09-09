@@ -53,7 +53,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
     <div
       ref={setNodeRef}
       onClick={onSelectEraClick}
-      className={`relative min-h-[145px] sm:min-h-[160px] rounded-[22px] p-3 flex flex-col justify-between transition-all duration-300 border ${
+      className={`relative min-h-[110px] sm:min-h-[150px] rounded-[18px] sm:rounded-[22px] p-2 sm:p-3 flex flex-col justify-between transition-all duration-300 border ${
         matchedEvent
           ? 'bg-[#34D399]/10 border-[#34D399]/60 shadow-[0_0_20px_rgba(52,211,153,0.15)]'
           : isOver

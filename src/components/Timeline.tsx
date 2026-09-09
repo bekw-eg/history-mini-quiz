@@ -18,10 +18,10 @@ export const Timeline: React.FC<TimelineProps> = ({
   className = '',
 }) => {
   return (
-    <nav aria-label="Тарихи эволюция шкаласы" className={`w-full max-w-4xl mx-auto px-4 py-3 ${className}`}>
+    <nav aria-label="Тарихи эволюция шкаласы" className={`w-full max-w-4xl mx-auto px-2 sm:px-4 py-2 sm:py-3 ${className}`}>
       <div className="flex items-center justify-between relative">
         {/* Continuous background connecting line */}
-        <div className="absolute top-1/2 left-4 right-4 -translate-y-1/2 h-[2px] bg-white/[0.08] z-0" />
+        <div className="absolute top-1/2 left-3 right-3 sm:left-4 sm:right-4 -translate-y-1/2 h-[2px] bg-white/[0.08] z-0" />
 
         {ERAS_DATA.map((era, index) => {
           const isActive = activeEraId === era.id || highlightedIndex === index;
@@ -34,7 +34,7 @@ export const Timeline: React.FC<TimelineProps> = ({
             >
               {/* Node indicator */}
               <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 border ${
+                className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-all duration-300 border ${
                   isActive
                     ? 'bg-[#38BDF8] border-[#38BDF8] text-[#080B12] shadow-[0_0_15px_rgba(56,189,248,0.6)] scale-110'
                     : isCompleted
@@ -43,17 +43,17 @@ export const Timeline: React.FC<TimelineProps> = ({
                 }`}
               >
                 {isCompleted ? (
-                  <CheckCircleSolid className="w-4 h-4" aria-hidden="true" />
+                  <CheckCircleSolid className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
                 ) : isActive ? (
-                  <ClockIcon className="w-4 h-4 animate-spin-slow stroke-[2.5]" aria-hidden="true" />
+                  <ClockIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin-slow stroke-[2.5]" aria-hidden="true" />
                 ) : (
-                  <span className="text-[10px] font-semibold tracking-tighter">{index + 1}</span>
+                  <span className="text-[9px] sm:text-[10px] font-semibold tracking-tighter">{index + 1}</span>
                 )}
               </div>
 
               {/* Label */}
               <span
-                className={`mt-1 text-[9px] sm:text-[11px] md:text-xs font-medium tracking-tight text-center max-w-[52px] sm:max-w-none leading-tight transition-colors ${
+                className={`mt-1 text-[8px] sm:text-[11px] md:text-xs font-medium tracking-tight text-center max-w-[46px] sm:max-w-none leading-tight truncate transition-colors ${
                   isActive
                     ? 'text-[#38BDF8] font-semibold'
                     : isCompleted

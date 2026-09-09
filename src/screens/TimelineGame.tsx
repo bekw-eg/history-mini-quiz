@@ -44,6 +44,8 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
   const [timelinePulseIndex, setTimelinePulseIndex] = useState(-1);
   const [canProceed, setCanProceed] = useState(false);
 
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+
   // Setup sensors for mouse, laptop trackpad, and touchscreen
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -53,7 +55,7 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 100,
+        delay: 150,
         tolerance: 5,
       },
     })
@@ -69,6 +71,7 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
         const newIndex = currentItems.findIndex((item) => item.id === over.id);
         return arrayMove(currentItems, oldIndex, newIndex);
       });
+      setSelectedCardId(null);
       // Clear error once user moves something
       if (hasError) {
         setHasError(false);
@@ -77,14 +80,64 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
     }
   };
 
+  const handleMoveLeft = (index: number) => {
+    if (isSuccess || index <= 0) return;
+    setItems((currentItems) => arrayMove(currentItems, index, index - 1));
+    if (hasError) {
+      setHasError(false);
+      setErrorMessage('');
+    }
+  };
+
+  const handleMoveRight = (index: number) => {
+    if (isSuccess || index >= items.length - 1) return;
+    setItems((currentItems) => arrayMove(currentItems, index, index + 1));
+    if (hasError) {
+      setHasError(false);
+      setErrorMessage('');
+    }
+  };
+
+  const handleCardClick = (eraId: string) => {
+    if (isSuccess) return;
+
+    if (!selectedCardId) {
+      // First card tapped: select it
+      setSelectedCardId(eraId);
+    } else if (selectedCardId === eraId) {
+      // Tapped same card: deselect
+      setSelectedCardId(null);
+    } else {
+      // Second card tapped: swap places!
+      setItems((currentItems) => {
+        const oldIndex = currentItems.findIndex((item) => item.id === selectedCardId);
+        const newIndex = currentItems.findIndex((item) => item.id === eraId);
+        if (oldIndex !== -1 && newIndex !== -1) {
+          const updated = [...currentItems];
+          const temp = updated[oldIndex];
+          updated[oldIndex] = updated[newIndex];
+          updated[newIndex] = temp;
+          return updated;
+        }
+        return currentItems;
+      });
+      setSelectedCardId(null);
+      if (hasError) {
+        setHasError(false);
+        setErrorMessage('');
+      }
+    }
+  };
+
   const handleCheck = () => {
-    // Check if items order matches 1, 2, 3, 4, 5
+    // Check if items order matches 1, 2, 3, 4, 5, 6
     const isCorrect = items.every((item, idx) => item.order === idx + 1);
 
     if (isCorrect) {
       setIsSuccess(true);
       setHasError(false);
       setErrorMessage('');
+      setSelectedCardId(null);
 
       // Trigger 2-second sequential timeline pulse
       let step = 0;
@@ -108,13 +161,13 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
   };
 
   return (
-    <div className="relative min-h-[82vh] flex flex-col justify-between max-w-6xl mx-auto px-4 py-6">
+    <div className="relative min-h-[80vh] flex flex-col justify-between max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-6">
       {/* Header section */}
-      <div className="text-center max-w-2xl mx-auto mb-6">
+      <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.1] text-xs font-semibold text-[#D6A84B] uppercase tracking-wider mb-2.5"
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.1] text-xs font-semibold text-[#D6A84B] uppercase tracking-wider mb-2"
         >
           <ClockIcon className="w-3.5 h-3.5" aria-hidden="true" />
           <span>1-тапсырма • Хронология</span>
@@ -123,18 +176,20 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
         <motion.h2
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC] tracking-tight mb-2"
+          className="text-xl sm:text-3xl font-extrabold text-[#F8FAFC] tracking-tight mb-1 sm:mb-2"
         >
           ӨРКЕНИЕТ ЖОЛЫН ҚҰРАСТЫР
         </motion.h2>
 
-        <p className="text-sm text-[#94A3B8]">
-          Карточкаларды сүйреп, адамзат тарихындағы кезеңдерді дұрыс ретпен орналастыр.
+        <p className="text-xs sm:text-sm text-[#94A3B8] max-w-md mx-auto">
+          {selectedCardId
+            ? 'Енді ауыстырғың келетін екінші карточканы бас!'
+            : 'Карточкаларды сүйреп немесе кезекпен екі карточканы басып ауыстыр.'}
         </p>
       </div>
 
       {/* Main Sortable Area */}
-      <div className="flex-1 flex flex-col items-center justify-center my-4">
+      <div className="flex-1 flex flex-col items-center justify-center my-2 sm:my-4 w-full">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -144,14 +199,20 @@ export const TimelineGame: React.FC<TimelineGameProps> = ({ onComplete }) => {
             items={items.map((it) => it.id)}
             strategy={horizontalListSortingStrategy}
           >
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 w-full max-w-6xl justify-items-center">
-              {items.map((era) => (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5 w-full max-w-6xl justify-items-stretch">
+              {items.map((era, index) => (
                 <SortableEraCard
                   key={era.id}
                   era={era}
+                  orderIndex={index}
+                  totalCards={items.length}
                   isSuccess={isSuccess}
                   hasError={hasError}
                   disabled={isSuccess}
+                  isSelected={selectedCardId === era.id}
+                  onCardClick={() => handleCardClick(era.id)}
+                  onMoveLeft={() => handleMoveLeft(index)}
+                  onMoveRight={() => handleMoveRight(index)}
                 />
               ))}
             </div>
